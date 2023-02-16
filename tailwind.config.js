@@ -9,7 +9,7 @@ module.exports = {
     },
     extend: {
       height :{
-      'screen70' : '70vh' ,
+      'screen65' : '65vh' ,
       },
     },
   },

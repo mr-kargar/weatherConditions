@@ -1,17 +1,15 @@
 import './App.css';
-import Header from './components/Header';
-import Search from './components/Search';
-import Footer from './components/Footer';
+import { RouterProvider } from 'react-router-dom';
+import router from './route/router';
+
 
 function App() {
   return (
-    <>
     <div className='container max-w-6xl'>
-    <Header/>
-    <Search/>
-    <Footer/>
+
+      <RouterProvider router={router}/>
+    
     </div>
-    </>
   );
 }
 

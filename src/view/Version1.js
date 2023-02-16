@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { currentWeather } from '../api/currentWeather';
-import LoadingResultWeather from './LoadingResultWeather';
-import ResultWeather from './ResultWeather';
+import { currentWeather } from '../api/version1/currentWeather';
+import DailyWeather from '../component/version1/DailyWeather';
+import Error from '../component/version1/Error';
+import LoadingResultWeather from '../component/version1/LoadingResultWeather';
+import ResultWeather from '../component/version1/ResultWeather';
 
-function Search() {
+function Version1() {
   const [city, setCity] = useState('');
   const [cityWeather, setCityWeather] = useState();
   const [loading, setLoading] = useState(true);
@@ -12,10 +14,10 @@ function Search() {
   const getResult = () => {
 
     const cityNameInput = document.getElementById("cityNameInput");
-    if (cityNameInput.value != '' && cityNameInput.value === city) {
+    if (cityNameInput.value !== '' && cityNameInput.value === city) {
       setFlag(!flag);
       setLoading(false);
-    } else if (cityNameInput.value != '') {
+    } else if (cityNameInput.value !== '') {
       setCity(cityNameInput.value);
       setLoading(false);
     }
@@ -43,12 +45,21 @@ function Search() {
         </input>
         <button className='bg-sky-500 text-white font-bold px-4 md:px-8 py-1 text-2xl rounded-lg md:hover:bg-white md:hover:text-sky-500 border-2 border-sky-500' onClick={() => getResult()}>Show</button>
       </div>
-      
+
       {(loading) ?
-        ((cityWeather) ?
-          <ResultWeather props={cityWeather} />
+        ((cityWeather && cityWeather !== 1) ?
+          (
+            <>
+              <ResultWeather cityWeather={cityWeather} />
+              <DailyWeather props={cityWeather} />
+            </>
+          )
           :
-          <div></div>
+          ((cityWeather === 1) ?
+            <Error />
+            :
+            <div ></div>
+          )
         )
         :
         <LoadingResultWeather />
@@ -58,4 +69,4 @@ function Search() {
   )
 }
 
-export default Search
+export default Version1
