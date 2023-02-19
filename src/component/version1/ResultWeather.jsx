@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 
 
 function ResultWeather({cityWeather}) {
+const themeColor = localStorage.getItem('themeColor') ? localStorage.getItem('themeColor') : 'sky';
 
     const [show, setShow] = useState(true);
 
@@ -14,9 +15,9 @@ function ResultWeather({cityWeather}) {
     return (
 
         <div className='container max-w-6xl p-4 '>
-            <div className={`border-2 border-sky-400 rounded-t-2xl ${show ? 'block' : 'hidden'}`}  >
+            <div className={`border-2 border-${themeColor}-400 rounded-t-2xl ${show ? 'block' : 'hidden'}`}  >
                 <div className="flex flex-col item-center ">
-                    <div className=" flex justify-between bg-sky-400 rounded-t-xl py-2 px-6">
+                    <div className={`flex justify-between bg-${themeColor}-400 rounded-t-xl py-2 px-6`}>
                         <div >
                             <strong>City :</strong>
                             <strong className='ml-2 text-pink-600'>{cityWeather.resolvedAddress}</strong>

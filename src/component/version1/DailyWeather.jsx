@@ -1,6 +1,9 @@
 import React from 'react'
 
 function DailyWeather({ props }) {
+    const themeColor = localStorage.getItem('themeColor') ? localStorage.getItem('themeColor') : 'sky';
+    const nameOfDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'saturday'];
+
     return (
         <div>
             <div className="flex items-center justify-center font-bold">
@@ -17,10 +20,13 @@ function DailyWeather({ props }) {
             <div className="flex overflow-x-auto m-4 gap-4">
 
                 {props.days.map(day => {
+                    const date = new Date(day.datetime);
+
                     return (
-                        <div className="flex border-2 rounded-lg  border-sky-400 p-2 mb-2">
+                        <div className={`flex border-2 rounded-lg  border-${themeColor}-400 p-2 mb-2`}>
                             <div className="flex flex-col justify-center items-center my-2 gap-1">
-                                <h6 className='inline-block font-bold px-10'>{day.datetime}</h6>
+                                <h6 className='inline-block font-bold px-10'>{nameOfDays[date.getDay()]}</h6>
+                                <h6 >{(day.datetime)}</h6>
                                 <img src={process.env.PUBLIC_URL + "/icons/" + day.icon + ".svg"} alt={day.icon} className="w-20 h-20" />
                                 <h5>{day.conditions}</h5>
                                 <h4>min : {day.tempmin}&deg;</h4>
@@ -30,7 +36,7 @@ function DailyWeather({ props }) {
                     )
                 })}
             </div>
-        </div>
+        </div >
     )
 }
 

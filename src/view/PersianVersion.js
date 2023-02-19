@@ -2,7 +2,7 @@ import React from 'react'
 
 function PersianVersion() {
   return (
-    <div>Coming Soon...</div>
+    <div className='flex items-center justify-center font-vazir my-10 dir-rtl'>به زودی ...</div>
   )
 }
 
